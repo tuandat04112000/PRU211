@@ -10,8 +10,8 @@ namespace Assets.Scripts.AttackerScripts
     internal class MoveManager : MonoBehaviour
     {
 
-        public float SpeedToMove = 10;
-        public float TimeToDestroy = 0.5f;
+        public float SpeedToMove = 6;
+        public float TimeToDestroy = 0.8f;
         public float Timer = 0;
 
         Rigidbody2D Rigidbody;
@@ -41,6 +41,14 @@ namespace Assets.Scripts.AttackerScripts
         public void Destroy()
         {
             Destroy(gameObject);
+        }
+        public void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.tag == "Bunny")
+            {
+                Destroy(collision.gameObject);
+                Destroy();
+            }
         }
 
     }

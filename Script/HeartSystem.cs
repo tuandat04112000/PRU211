@@ -34,6 +34,7 @@ public class HeartSystem : MonoBehaviour
         {
             Debug.Log("We Are Dead!!!");
         }
+
     }
 
     public void TakeDamage(int d)
@@ -48,5 +49,12 @@ public class HeartSystem : MonoBehaviour
             }
         }
         
+    }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Bunny")
+        {
+            TakeDamage(1);
+        }
     }
 }

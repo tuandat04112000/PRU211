@@ -14,8 +14,8 @@ namespace Assets.Scripts.PlayerScripts
 
         private float MAX_HP = 2000;
         private float MAX_MP = 500;
-        private float MAX_SPEED  = 15;
-        private float BASE_SPEED  = 8;
+        private float MAX_SPEED = 15;
+        private float BASE_SPEED = 8;
         private float BASE_DAMAGE = 20;
 
         private float INCREASE_MAX_HP = 0;
@@ -32,7 +32,7 @@ namespace Assets.Scripts.PlayerScripts
 
         private void Start()
         {
-            if(!LoadPlayer())
+            if (!LoadPlayer())
             {
                 Current_HP = MAX_HP;
                 Current_MP = MAX_MP;
@@ -41,7 +41,11 @@ namespace Assets.Scripts.PlayerScripts
 
         private void Update()
         {
-            
+
+        }
+        public void FixedUpdate()
+        {
+            MpRecovery();
         }
 
 
@@ -51,7 +55,21 @@ namespace Assets.Scripts.PlayerScripts
             // Implement later
             return false;
         }
+        public float MpRecoveryTime = 5f;
+        public int MpRecoveryValue = 10;
+        private float currentMpRecoveryTimer = 0;
+        void MpRecovery()
+        {
+            currentMpRecoveryTimer += Time.deltaTime;
+            if (currentMpRecoveryTimer >= MpRecoveryTime)
+            {
+                if (Current_MP < MAX_MP)
+                {
+                    // Debug.Log("Mp Recovery...");
+                    Current_MP = Mathf.Min(Current_MP + MpRecoveryValue, MAX_MP);
+                }
 
-   
+            }
+        }
     }
 }
