@@ -33,7 +33,7 @@ public class NextScreen : MonoBehaviour
             }
 
             else if(gameObject.name == "Door3") {
-                //SceneManager.LoadScene("");
+                SceneManager.LoadScene("EndGame");
             }
         }
 
