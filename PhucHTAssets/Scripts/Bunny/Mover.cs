@@ -17,35 +17,30 @@ public class Mover : MonoBehaviour
     float FixedSpeedRuntime => Time.fixedDeltaTime * BaseUnit;
     float SpeedRuntime => Time.deltaTime * BaseSpeed * BaseUnit;
 
-    float horizontalAxis = -1;
+    float horizontalAxis = 1;
 
     public bool isMoving => horizontalAxis != 0;
 
     public float radius = 20;
 
-    public Vector2 startPosition;
 
     void MoveProcess()
     {
-        float xVal = horizontalAxis * SpeedRuntime * (BaseSpeed);
+        float xVal = -horizontalAxis * SpeedRuntime * (BaseSpeed);
         _rigidbody2D.velocity = new Vector2(xVal, _rigidbody2D.velocity.y);
 
-        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * (-horizontalAxis), transform.localScale.y, transform.localScale.z);
+        transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x) * (horizontalAxis), transform.localScale.y, transform.localScale.z);
     }
 
     void FlipDetection()
     {
-        bool isFlip = !Physics2D.OverlapCircle(FlipSensor_01.position, 0.01f, LayerMask.GetMask("Ground"));
+        bool isFlip = !Physics2D.OverlapCircle(FlipSensor_01.position, 0.1f, GroundLayer)
+            || Physics2D.OverlapCircle(FlipSensor_02.position, 0.1f, GroundLayer);
 
         if(isFlip)
         {
             horizontalAxis *= -1;
         }
-    }
-
-    float moveDistance()
-    {
-        return (new Vector2(transform.position.x, transform.position.y) - startPosition).magnitude;
     }
 
     // Start is called before the first frame update
@@ -58,13 +53,13 @@ public class Mover : MonoBehaviour
             Debug.Log("Bunny: Missing component!");
         }
 
-        startPosition = new Vector2(transform.position.x, transform.position.y);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Bunny: " + transform.position);
+        
         FlipDetection();
         MoveProcess();
     }

@@ -12,6 +12,10 @@ namespace Assets.Scripts.PlayerScripts
         Animator PlayerAnimator;
         PlayerManager player_manager;
 
+     
+        
+      
+
         // Speed control
         public float BaseSpeed = 3;
         private int BaseUnit = 50;
@@ -54,7 +58,7 @@ namespace Assets.Scripts.PlayerScripts
                 accelMpLosses += Time.fixedDeltaTime * accelMpFrequencyPerSecond;
                 if (accelMpLosses >= 1)
                 {
-                    // player_manager.Curent_MP--;
+                    player_manager.Current_MP--;
                     accelMpLosses = 0;
                 }
                 Debug.Log("MoveManager: Accel Active...");
@@ -111,13 +115,18 @@ namespace Assets.Scripts.PlayerScripts
             PlayerBody = GetComponent<Rigidbody2D>();
             PlayerAnimator = GetComponent<Animator>();
             player_manager = GetComponent<PlayerManager>();
-            if(player_manager == null || PlayerBody == null || PlayerAnimator == null)
+            if (player_manager == null || PlayerBody == null || PlayerAnimator == null)
             {
                 throw new System.Exception("MoveManager: Missing Component!");
             }
 
+          
+        
+         
+           
         }
 
+       
         void Update()
         {
             AccelDetection();
@@ -132,5 +141,7 @@ namespace Assets.Scripts.PlayerScripts
             FaceProcess();
             SideCollapseProcess();
         }
+
+        
     }
 }

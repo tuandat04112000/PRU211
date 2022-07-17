@@ -41,6 +41,7 @@ namespace Assets.Scripts.PlayerScripts
 
         private void Update()
         {
+
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 AttackSignal = true;

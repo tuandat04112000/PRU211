@@ -13,7 +13,7 @@ namespace Assets.Scripts.PlayerScripts
     {
 
         private float MAX_HP = 2000;
-        private float MAX_MP = 500;
+        private float MAX_MP = 300;
         private float MAX_SPEED = 15;
         private float BASE_SPEED = 8;
         private float BASE_DAMAGE = 20;
@@ -29,6 +29,7 @@ namespace Assets.Scripts.PlayerScripts
         private float Current_DAMAGE;
         [SerializeField]
         private float Current_SPEED;
+    
 
         private void Start()
         {
@@ -48,8 +49,6 @@ namespace Assets.Scripts.PlayerScripts
             MpRecovery();
         }
 
-
-
         bool LoadPlayer()
         {
             // Implement later
@@ -60,7 +59,7 @@ namespace Assets.Scripts.PlayerScripts
         private float currentMpRecoveryTimer = 0;
         void MpRecovery()
         {
-            currentMpRecoveryTimer += Time.deltaTime;
+            currentMpRecoveryTimer -= Time.deltaTime;
             if (currentMpRecoveryTimer >= MpRecoveryTime)
             {
                 if (Current_MP < MAX_MP)

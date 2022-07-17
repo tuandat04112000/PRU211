@@ -12,7 +12,7 @@ public class Follower : MonoBehaviour
 
     void Start() 
     {
-        smooth = 3;
+        smooth = 10;
     }
 
     void FixedUpdate() 
